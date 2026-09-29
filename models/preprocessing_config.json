@@ -1,0 +1,26 @@
+{
+  "sequence_length": 48,
+  "feature_dim": 225,
+  "normalization": "root_zero_centered_wrist_pose",
+  "temporal_resampling": "linear_index_interpolation",
+  "processed_samples_count": 425,
+  "classes_prepared": [
+    "bank",
+    "biglarge",
+    "black",
+    "blue",
+    "cellphone",
+    "good",
+    "hello",
+    "hot",
+    "new",
+    "pen",
+    "red",
+    "shoes",
+    "smalllittle",
+    "storeorshop",
+    "thankyou",
+    "tshirt",
+    "white"
+  ]
+}

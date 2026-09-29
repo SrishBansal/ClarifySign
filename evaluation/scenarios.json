@@ -1,0 +1,147 @@
+[
+  {
+    "id": "scenario_01_ambiguous_color",
+    "name": "Ambiguous Color (Blue vs Black)",
+    "description": "Customer gestures black, but classifier outputs top-1 blue (0.49) vs black (0.41) due to lighting.",
+    "ground_truth": "black",
+    "candidates": [
+      ["blue", 0.49],
+      ["black", 0.41],
+      ["green", 0.10]
+    ],
+    "context": {
+      "tshirt": 0.85
+    },
+    "synthetic": true
+  },
+  {
+    "id": "scenario_02_ambiguous_garment",
+    "name": "Ambiguous Garment (T-shirt vs Shirt)",
+    "description": "Fast hand sweep at chest level creating boundary ambiguity between t-shirt and formal shirt.",
+    "ground_truth": "tshirt",
+    "candidates": [
+      ["tshirt", 0.48],
+      ["shirt", 0.41],
+      ["shoes", 0.11]
+    ],
+    "context": {},
+    "synthetic": true
+  },
+  {
+    "id": "scenario_03_ambiguous_size",
+    "name": "Ambiguous Size (Small vs Medium)",
+    "description": "Customer gestures medium size, but model predicts small (0.46) vs medium (0.42).",
+    "ground_truth": "medium",
+    "candidates": [
+      ["smalllittle", 0.46],
+      ["medium", 0.42],
+      ["biglarge", 0.12]
+    ],
+    "context": {
+      "tshirt": 0.70,
+      "blue": 0.60
+    },
+    "synthetic": true
+  },
+  {
+    "id": "scenario_04_polysemous_bank",
+    "name": "Polysemous Sign (Bank Ambiguity)",
+    "description": "Customer signs 'bank'; system must disambiguate financial transaction from river/blood bank.",
+    "ground_truth": "bank",
+    "candidates": [
+      ["bank", 0.51],
+      ["blood bank", 0.29],
+      ["river bank", 0.20]
+    ],
+    "context": {
+      "storeorshop": 0.65
+    },
+    "synthetic": true
+  },
+  {
+    "id": "scenario_05_clear_shoes",
+    "name": "Clear Unambiguous Footwear",
+    "description": "Distinct, highly confident sign pointing down toward feet.",
+    "ground_truth": "shoes",
+    "candidates": [
+      ["shoes", 0.94],
+      ["hat", 0.04],
+      ["tshirt", 0.02]
+    ],
+    "context": {},
+    "synthetic": true
+  },
+  {
+    "id": "scenario_06_clear_greeting",
+    "name": "Clear Greeting Gesture",
+    "description": "Standard open palm wave gesture with high confidence and margin.",
+    "ground_truth": "hello",
+    "candidates": [
+      ["hello", 0.96],
+      ["thankyou", 0.03],
+      ["good", 0.01]
+    ],
+    "context": {},
+    "synthetic": true
+  },
+  {
+    "id": "scenario_07_subtle_color_red_white",
+    "name": "Subtle Color Confusion (Red vs White)",
+    "description": "Customer gestures white, but model outputs red (0.44) vs white (0.39).",
+    "ground_truth": "white",
+    "candidates": [
+      ["red", 0.44],
+      ["white", 0.39],
+      ["black", 0.17]
+    ],
+    "context": {
+      "shoes": 0.75
+    },
+    "synthetic": true
+  },
+  {
+    "id": "scenario_08_transaction_payment",
+    "name": "Payment Method Intent",
+    "description": "Customer inquires about bank payment, but model outputs cellphone (0.47) vs bank (0.43).",
+    "ground_truth": "bank",
+    "candidates": [
+      ["cellphone", 0.47],
+      ["bank", 0.43],
+      ["pen", 0.10]
+    ],
+    "context": {
+      "storeorshop": 0.80
+    },
+    "synthetic": true
+  },
+  {
+    "id": "scenario_09_flat_distribution_noise",
+    "name": "High Motion Blur / Distorted Sign",
+    "description": "Signer moved rapidly out of frame center, resulting in high entropy dispersion.",
+    "ground_truth": "pen",
+    "candidates": [
+      ["pen", 0.28],
+      ["cellphone", 0.25],
+      ["storeorshop", 0.22],
+      ["bank", 0.15],
+      ["hot", 0.10]
+    ],
+    "context": {},
+    "synthetic": true
+  },
+  {
+    "id": "scenario_10_clear_gratitude",
+    "name": "Clear Thank You Gesture",
+    "description": "Flat hand from chin outward gesture concluding interaction.",
+    "ground_truth": "thankyou",
+    "candidates": [
+      ["thankyou", 0.92],
+      ["good", 0.05],
+      ["hello", 0.03]
+    ],
+    "context": {
+      "bank": 0.60
+    },
+    "synthetic": true
+  }
+]

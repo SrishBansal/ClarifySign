@@ -1,0 +1,52 @@
+{
+  "model_architecture": "BiLSTM + LayerNorm + Dual Temporal Pooling + GELU Dense Head",
+  "feature_dim": 225,
+  "sequence_length": 48,
+  "num_classes": 17,
+  "classes": [
+    "bank",
+    "biglarge",
+    "black",
+    "blue",
+    "cellphone",
+    "good",
+    "hello",
+    "hot",
+    "new",
+    "pen",
+    "red",
+    "shoes",
+    "smalllittle",
+    "storeorshop",
+    "thankyou",
+    "tshirt",
+    "white"
+  ],
+  "total_dataset_samples": 425,
+  "train_samples": 153,
+  "val_samples": 136,
+  "test_samples": 136,
+  "hardware_device": "Apple Silicon (MPS)",
+  "hyperparameters": {
+    "batch_size": 16,
+    "learning_rate": 0.001,
+    "lstm_hidden_dim": 128,
+    "lstm_num_layers": 2,
+    "dropout": 0.3,
+    "seed": 42
+  },
+  "verified_metrics": {
+    "best_validation_loss": 0.0013,
+    "test_loss": 0.0014,
+    "test_top1_accuracy": 1.0,
+    "test_top3_accuracy": 1.0,
+    "training_duration_seconds": 9.01
+  },
+  "signer_leakage_safeguard": {
+    "signer_independent_split": true,
+    "warning": null
+  },
+  "trained_timestamp": "2026-09-28 19:16:57 UTC",
+  "model_file": "models/isl_bilstm.pt",
+  "labels_file": "models/labels.json"
+}
