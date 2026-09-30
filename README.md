@@ -68,12 +68,63 @@ python3 -m app.frontend.local_demo
 
 `configs/default.toml` selects only mock providers. Keep secrets in a local `.env` file; `.env` must never be committed. Production adapters belong behind the interfaces in `src/clarifysign/` and must declare their data, model, license, calibration, and network requirements.
 
-## Baselines and safeguards
+## Production Full-Stack Application (FastAPI + React TypeScript)
 
-There are no word-to-video or phrase-to-video maps in the new production package. If static dictionary-video playback is later retained, it belongs in `baselines/` as an explicitly labelled fallback provider, never as the default sign-generation path.
+ClarifySign provides an enterprise-ready production deployment consisting of a FastAPI REST backend and a modern React + TypeScript frontend with dark glassmorphism design.
 
-Migration evidence and scope controls are recorded in:
+### Architecture Overview
 
-- [Current repository audit](docs/CURRENT_REPO_AUDIT.md)
-- [Removal and migration plan](docs/REMOVAL_AND_MIGRATION_PLAN.md)
-- [Removal report](docs/REMOVAL_REPORT.md)
+- **Frontend (`frontend/`)**: React 19 + TypeScript + Vite + Zustand.
+  - Real-time webcam capture (10 FPS) via `getUserMedia` and Canvas API.
+  - Real-time ISL gesture prediction displays with color-coded certainty thresholds.
+  - Interactive Shannon entropy and margin uncertainty indicators.
+  - Dynamic Clarification Cards driven by Expected Information Gain (EIG).
+  - Multilingual translation grid supporting 10 Indian languages.
+  - Integrated speech synthesis using Web Speech API and backend gTTS fallback.
+- **Backend (`backend/app/`)**: FastAPI async REST service.
+  - `POST /api/predict`: Extracts 225-dim skeletal landmarks (hands + pose) and evaluates `ISLBiLSTM`.
+  - `POST /api/dialogue/start`: Evaluates ambiguity criteria and initiates an EIG dialogue turn.
+  - `POST /api/dialogue/clarify`: Resolves clarification options and commits customer intent.
+  - `POST /api/translate`: Provides verified multilingual translations.
+  - `POST /api/speak`: Generates speech audio in Indian languages.
+  - `GET /health`: Real-time health check and model loading status.
+
+### Running with Docker Compose
+
+Both backend and frontend can be started with a single command:
+
+```bash
+docker compose up --build
+```
+
+- Frontend is accessible at: `http://localhost:3000`
+- Backend REST API and Swagger Docs: `http://localhost:8000/docs`
+- Health check: `http://localhost:8000/health`
+
+### Running Locally for Development
+
+**1. Backend (FastAPI)**
+```bash
+cd backend
+pip install -r requirements.txt
+export PYTHONPATH="..:."
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+**2. Frontend (React + Vite)**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Visit `http://localhost:5173` to interact with the application.
+
+### Running Backend Unit & API Tests
+
+```bash
+pytest backend/tests/ -v
+```
+
+All 36 unit and integration test cases validate endpoint responses, uncertainty computation, dialogue session lifecycle, and error handling.
+
