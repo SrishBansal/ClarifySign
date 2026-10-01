@@ -4,3 +4,7 @@ __pycache__/
 data/raw/
 data/landmarks/
 models/*.keras
+.pytest_cache/
+node_modules/
+dist/
+data/processed_full_263/

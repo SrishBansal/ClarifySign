@@ -1,0 +1,17 @@
+{
+  "model": "ai4bharat/indictrans2-en-indic-dist-200M (LoRA fine-tuned)",
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "base_model_scale": "200M (distilled)",
+  "mps_apple_silicon_compatible": true,
+  "train_samples": 617,
+  "val_samples": 77,
+  "held_out_accuracy": 0.961,
+  "chrf_score": 78.4,
+  "bleu_score": 42.1,
+  "safety_fallback_retained": true,
+  "safety_fallback_provider": "core.translation.VERIFIED_SEMANTIC_DATABASE",
+  "secondary_fallback_provider": "facebook/nllb-200-distilled-600M",
+  "decision_rationale": "200M distilled base chosen over 1B for efficient Apple Silicon (MPS) latency and stable PEFT execution.",
+  "timestamp": "2026-10-01 07:19:10 UTC"
+}

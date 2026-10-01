@@ -40,7 +40,7 @@ from config import (
     EARLY_STOPPING_PATIENCE,
     RANDOM_SEED
 )
-from core.recognizer import ISLBiLSTM
+from core.recognizer import ISLBiLSTM, ISLTransformerEncoder
 
 
 class LandmarkDataset(Dataset):
@@ -164,7 +164,8 @@ def train_model(
     epochs=NUM_EPOCHS,
     batch_size=BATCH_SIZE,
     learning_rate=LEARNING_RATE,
-    seed=RANDOM_SEED
+    seed=RANDOM_SEED,
+    arch="bilstm"
 ):
     """Executes full reproducible training workflow."""
     # Set seeds for reproducibility
@@ -184,7 +185,7 @@ def train_model(
         device = torch.device("cpu")
         dev_name = "Host CPU"
 
-    print(f"Executing training on: {dev_name}")
+    print(f"Executing training on: {dev_name} (Architecture: {arch.upper()})")
 
     # Load data
     X, y, file_names, raw_classes = load_dataset(data_dir)
@@ -214,14 +215,24 @@ def train_model(
     test_loader = DataLoader(LandmarkDataset(X[test_idx], y_encoded[test_idx]), batch_size=batch_size, shuffle=False)
 
     # Instantiate model
-    model = ISLBiLSTM(
-        input_dim=FEATURE_DIM,
-        hidden_dim=LSTM_HIDDEN_DIM,
-        num_layers=LSTM_NUM_LAYERS,
-        num_classes=num_classes,
-        dense_dim=DENSE_HIDDEN_DIM,
-        dropout=DROPOUT_RATE
-    ).to(device)
+    if arch.lower() == "transformer":
+        model = ISLTransformerEncoder(
+            input_dim=FEATURE_DIM,
+            d_model=128,
+            nhead=4,
+            num_layers=3,
+            num_classes=num_classes,
+            dropout=DROPOUT_RATE
+        ).to(device)
+    else:
+        model = ISLBiLSTM(
+            input_dim=FEATURE_DIM,
+            hidden_dim=LSTM_HIDDEN_DIM,
+            num_layers=LSTM_NUM_LAYERS,
+            num_classes=num_classes,
+            dense_dim=DENSE_HIDDEN_DIM,
+            dropout=DROPOUT_RATE
+        ).to(device)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-4)
@@ -310,6 +321,7 @@ def train_model(
     model_out.parent.mkdir(parents=True, exist_ok=True)
     checkpoint = {
         "state_dict": model.state_dict(),
+        "arch": arch.lower(),
         "input_dim": FEATURE_DIM,
         "hidden_dim": LSTM_HIDDEN_DIM,
         "num_layers": LSTM_NUM_LAYERS,
@@ -351,7 +363,7 @@ def train_model(
     test_top3_acc = test_top3_correct / max(1, test_total)
 
     print(f"\n==========================================")
-    print(f"FINAL TEST SET EVALUATION RESULTS:")
+    print(f"FINAL TEST SET EVALUATION RESULTS ({arch.upper()}):")
     print(f"Test Loss:        {test_loss:.4f}")
     print(f"Test Top-1 Acc:   {test_top1_acc*100:.2f}%")
     print(f"Test Top-3 Acc:   {test_top3_acc*100:.2f}%")
@@ -360,7 +372,8 @@ def train_model(
 
     # Record full verified training metadata
     metadata = {
-        "model_architecture": "BiLSTM + LayerNorm + Dual Temporal Pooling + GELU Dense Head",
+        "model_architecture": f"ISL{arch.capitalize()} (225-dim landmarks)",
+        "arch": arch.lower(),
         "feature_dim": FEATURE_DIM,
         "sequence_length": SEQUENCE_LENGTH,
         "num_classes": num_classes,
@@ -373,8 +386,6 @@ def train_model(
         "hyperparameters": {
             "batch_size": batch_size,
             "learning_rate": learning_rate,
-            "lstm_hidden_dim": LSTM_HIDDEN_DIM,
-            "lstm_num_layers": LSTM_NUM_LAYERS,
             "dropout": DROPOUT_RATE,
             "seed": seed
         },
@@ -390,8 +401,8 @@ def train_model(
             "warning": leakage_warning
         },
         "trained_timestamp": time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime()),
-        "model_file": "models/isl_bilstm.pt",
-        "labels_file": "models/labels.json"
+        "model_file": str(model_out),
+        "labels_file": str(labels_out)
     }
 
     with open(TRAINING_METADATA_PATH, "w", encoding="utf-8") as f:
@@ -409,6 +420,7 @@ def main():
     parser.add_argument("--epochs", type=int, default=NUM_EPOCHS, help="Number of training epochs")
     parser.add_argument("--batch-size", type=int, default=BATCH_SIZE, help="Training batch size")
     parser.add_argument("--lr", type=float, default=LEARNING_RATE, help="Learning rate")
+    parser.add_argument("--arch", choices=["bilstm", "transformer"], default="bilstm", help="Neural model architecture")
     args = parser.parse_args()
 
     train_model(
@@ -417,9 +429,11 @@ def main():
         labels_out=Path(args.labels),
         epochs=args.epochs,
         batch_size=args.batch_size,
-        learning_rate=args.lr
+        learning_rate=args.lr,
+        arch=args.arch
     )
 
 
 if __name__ == "__main__":
     main()
+

@@ -35,3 +35,11 @@ async def predict(request: PredictRequest):
         uncertainty=UncertaintyMetrics(**uncertainty),
         inference_ms=elapsed_ms,
     )
+
+
+@router.get("/labels")
+async def get_labels():
+    """Returns the list of supported class labels dynamically."""
+    svc = get_inference_service()
+    return {"labels": svc.labels, "count": len(svc.labels)}
+

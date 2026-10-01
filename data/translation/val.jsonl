@@ -1,0 +1,77 @@
+{"source": "Clarification: Pen", "target": "ನನಗೆ ಸಹಿ ಮಾಡಲು ಪೆನ್ ಬೇಕು.", "target_language": "Kannada", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Please show me black.", "target": "काळा", "target_language": "Marathi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Pen.", "target": "కలం (పెన్)", "target_language": "Telugu", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Good", "target": "এটি খুব ভালো, আমার পছন্দ হয়েছে।", "target_language": "Bengali", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Thank you for visiting our shop.", "target": "আমাদের দোকানে আসার জন্য ধন্যবাদ।", "target_language": "Bengali", "domain": "general_augmentation", "weight": 0.5}
+{"source": "Clarification: Hot", "target": "খুব গরম পড়েছে / গরম চা বা কফি কি পাওয়া যাবে?", "target_language": "Bengali", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Clarification: Cellphone", "target": "ਕੀ ਮੋਬਾਈਲ ਜਾਂ ਯੂਪੀਆਈ ਰਾਹੀਂ ਭੁਗਤਾਨ ਹੋ ਸਕਦਾ ਹੈ?", "target_language": "Punjabi", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Clarification: Good", "target": "ഇത് വളരെ നല്ലതാണ്, എനിക്ക് ഇഷ്ടപ്പെട്ടു.", "target_language": "Malayalam", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Hat.", "target": "തൊപ്പി", "target_language": "Malayalam", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me shirt.", "target": "शर्ट", "target_language": "Marathi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Thankyou.", "target": "ಧನ್ಯವಾದಗಳು!", "target_language": "Kannada", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me small.", "target": "ചെറിയ വലിപ്പം", "target_language": "Malayalam", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want thankyou.", "target": "धन्यवाद!", "target_language": "Marathi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Hello.", "target": "ନମସ୍କାର!", "target_language": "Odia", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Red", "target": "నాకు ఎరుపు రంగులో కావాలి.", "target_language": "Telugu", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "I want cellphone.", "target": "मोबाइल फोन", "target_language": "Hindi", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want cellphone.", "target": "கைப்பேசி", "target_language": "Tamil", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want shoes.", "target": "పాదరక్షలు (షూలు)", "target_language": "Telugu", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Blue", "target": "मुझे नीले रंग में चाहिए।", "target_language": "Hindi", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Clarification: Storeorshop", "target": "ఈ దుకాణం చాలా బాగుంది.", "target_language": "Telugu", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Clarification: Hot", "target": "వాతావరణం చాలా వేడిగా ఉంది / వేడి టీ లేదా కాఫీ దొరుకుతుందా?", "target_language": "Telugu", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "I want black.", "target": "ಕಪ್ಪು", "target_language": "Kannada", "domain": "retail_gold", "weight": 2.0}
+{"source": "Hat.", "target": "টুপি", "target_language": "Bengali", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me tshirt.", "target": "ਟੀ-ਸ਼ਰਟ", "target_language": "Punjabi", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want hat.", "target": "ટોપી", "target_language": "Gujarati", "domain": "retail_gold", "weight": 2.0}
+{"source": "Good.", "target": "బాగుంది", "target_language": "Telugu", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me new.", "target": "नवीन माल", "target_language": "Marathi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Blue.", "target": "निळा", "target_language": "Marathi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Bank", "target": "நான் வங்கி அல்லது ஆன்லைன் மூலம் பணம் செலுத்த விரும்புகிறேன்.", "target_language": "Tamil", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Clarification: Hello", "target": "ନମସ୍କାର!", "target_language": "Odia", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Please show me cellphone.", "target": "ਮੋਬਾਈਲ ਫੋਨ", "target_language": "Punjabi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Shirt", "target": "എനിക്ക് ഷർട്ട് കാണണം.", "target_language": "Malayalam", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Please show me pen.", "target": "ਕਲਮ", "target_language": "Punjabi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Shirt", "target": "ਮੈਂ ਕਮੀਜ਼ ਦੇਖਣਾ ਚਾਹੁੰਦਾ ਹਾਂ।", "target_language": "Punjabi", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Small.", "target": "ଛୋଟ ଆକାର", "target_language": "Odia", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me thankyou.", "target": "धन्यवाद!", "target_language": "Marathi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Storeorshop", "target": "ഈ കട വളരെ മികച്ചതാണ്.", "target_language": "Malayalam", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Please show me small.", "target": "ছোট সাইজ", "target_language": "Bengali", "domain": "retail_gold", "weight": 2.0}
+{"source": "What is the total price?", "target": "कुल कीमत क्या है?", "target_language": "Hindi", "domain": "general_augmentation", "weight": 0.5}
+{"source": "I want smalllittle.", "target": "लहान आकार", "target_language": "Marathi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Blue.", "target": "ನೀಲಿ", "target_language": "Kannada", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me hello.", "target": "ନମସ୍କାର!", "target_language": "Odia", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Smalllittle", "target": "ਮੈਨੂੰ ਛੋਟਾ ਆਕਾਰ (Small) ਚਾਹੀਦਾ ਹੈ।", "target_language": "Punjabi", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Please show me cellphone.", "target": "మొబైల్ ఫోన్", "target_language": "Telugu", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want new.", "target": "नवीन माल", "target_language": "Marathi", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want white.", "target": "വെള്ള", "target_language": "Malayalam", "domain": "retail_gold", "weight": 2.0}
+{"source": "Biglarge.", "target": "বড় সাইজ", "target_language": "Bengali", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Tshirt", "target": "मुझे टी-शर्ट देखनी है।", "target_language": "Hindi", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "I want white.", "target": "ಬಿಳಿ", "target_language": "Kannada", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want shoes.", "target": "പാദരക്ഷകൾ (ഷൂസ്)", "target_language": "Malayalam", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want smalllittle.", "target": "சிறிய அளவு", "target_language": "Tamil", "domain": "retail_gold", "weight": 2.0}
+{"source": "Cellphone.", "target": "मोबाइल फोन", "target_language": "Hindi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Biglarge.", "target": "મોટી સાઈઝ", "target_language": "Gujarati", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Thankyou", "target": "ధన్యవాଦాలు! చాలా ధన్యవాଦాలు.", "target_language": "Telugu", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "White.", "target": "வெள்ளை", "target_language": "Tamil", "domain": "retail_gold", "weight": 2.0}
+{"source": "Tshirt.", "target": "ടി-ഷർട്ട്", "target_language": "Malayalam", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want bank.", "target": "ব্যাংক / অর্থ প্রদান", "target_language": "Bengali", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me white.", "target": "வெள்ளை", "target_language": "Tamil", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Shoes", "target": "मुझे जूते देखने हैं।", "target_language": "Hindi", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Clarification: Smalllittle", "target": "నాకు చిన్న సైజు (Small) కావాలి.", "target_language": "Telugu", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "I want smalllittle.", "target": "ಚಿಕ್ಕ ಗಾತ್ರ", "target_language": "Kannada", "domain": "retail_gold", "weight": 2.0}
+{"source": "Storeorshop.", "target": "ਦੁਕਾਨ", "target_language": "Punjabi", "domain": "retail_gold", "weight": 2.0}
+{"source": "Hello.", "target": "નમસ્તે!", "target_language": "Gujarati", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me black.", "target": "കറുപ്പ്", "target_language": "Malayalam", "domain": "retail_gold", "weight": 2.0}
+{"source": "What is the total price?", "target": "মোট মূল্য কত?", "target_language": "Bengali", "domain": "general_augmentation", "weight": 0.5}
+{"source": "I want thankyou.", "target": "ಧನ್ಯವಾದಗಳು!", "target_language": "Kannada", "domain": "retail_gold", "weight": 2.0}
+{"source": "Black.", "target": "నలుపు", "target_language": "Telugu", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Pen", "target": "నాకు సంతకం చేయడానికి పెన్ కావాలి.", "target_language": "Telugu", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Clarification: Black", "target": "મને કાળા રંગમાં જોઈએ છે.", "target_language": "Gujarati", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "Please show me shoes.", "target": "બૂટ", "target_language": "Gujarati", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Biglarge", "target": "મને મોટી સાઈઝ (Large) જોઈએ છે.", "target_language": "Gujarati", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "I want smalllittle.", "target": "નાની સાઈઝ", "target_language": "Gujarati", "domain": "retail_gold", "weight": 2.0}
+{"source": "Clarification: Cellphone", "target": "ಮೊಬೈಲ್ ಅಥವಾ ಯುಪಿಐ ಮೂಲಕ ಪಾವತಿ ಮಾಡಬಹುದೇ?", "target_language": "Kannada", "domain": "dialogue_act_gold", "weight": 2.0}
+{"source": "I want white.", "target": "வெள்ளை", "target_language": "Tamil", "domain": "retail_gold", "weight": 2.0}
+{"source": "I want storeorshop.", "target": "દુકાન", "target_language": "Gujarati", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me storeorshop.", "target": "ଦୋକାନ", "target_language": "Odia", "domain": "retail_gold", "weight": 2.0}
+{"source": "Please show me black.", "target": "ಕಪ್ಪು", "target_language": "Kannada", "domain": "retail_gold", "weight": 2.0}

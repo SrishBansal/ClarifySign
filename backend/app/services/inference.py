@@ -101,6 +101,13 @@ class InferenceService:
     def device(self) -> str:
         return self._device
 
+    @property
+    def labels(self) -> List[str]:
+        """Returns the list of class labels from the loaded recognizer."""
+        if self._recognizer is not None:
+            return list(self._recognizer.labels)
+        return []
+
     def _decode_frame(self, frame_b64: str) -> np.ndarray:
         """Decode base64 image → BGR numpy array."""
         try:

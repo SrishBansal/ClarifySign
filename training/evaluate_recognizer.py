@@ -26,10 +26,16 @@ from core.recognizer import ISLRecognizer
 from core.uncertainty import entropy, margin
 
 
-def evaluate(data_dir=PROCESSED_DATA_DIR, out_file=RESULTS_DIR / "recognizer_evaluation.json"):
-    recognizer = ISLRecognizer(model_path=MODEL_PATH, labels_path=LABELS_PATH)
+def evaluate(
+    data_dir=PROCESSED_DATA_DIR,
+    out_file=RESULTS_DIR / "recognizer_evaluation.json",
+    key=None,
+    model_path=MODEL_PATH,
+    labels_path=LABELS_PATH
+):
+    recognizer = ISLRecognizer(model_path=model_path, labels_path=labels_path)
     if not recognizer.available:
-        print(f"Error: Model not found at {MODEL_PATH}. Train the model first.")
+        print(f"Error: Model not found at {model_path}. Train the model first.")
         return
 
     y_true = []
@@ -92,27 +98,56 @@ def evaluate(data_dir=PROCESSED_DATA_DIR, out_file=RESULTS_DIR / "recognizer_eva
 
     out_file = Path(out_file)
     out_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(out_file, "w", encoding="utf-8") as f:
-        json.dump(result, f, indent=2)
 
-    print("\n--- Model Evaluation Summary ---")
+    # Load existing evaluation data if present to preserve baseline
+    existing_data = {}
+    if out_file.exists():
+        try:
+            with open(out_file, "r", encoding="utf-8") as f:
+                existing_data = json.load(f)
+        except Exception:
+            existing_data = {}
+
+    # If existing data is flat (old 17-class baseline), migrate to nested format
+    if "top1_accuracy" in existing_data and "baseline_17class_bilstm" not in existing_data:
+        existing_data = {
+            "baseline_17class_bilstm": existing_data
+        }
+
+    target_key = key or "full_evaluation"
+    existing_data[target_key] = result
+
+    with open(out_file, "w", encoding="utf-8") as f:
+        json.dump(existing_data, f, indent=2)
+
+    print(f"\n--- Model Evaluation Summary ({target_key}) ---")
     print(f"Total Evaluated Samples: {total}")
     print(f"Top-1 Accuracy:          {top1_acc*100:.2f}%")
     print(f"Top-3 Accuracy:          {top3_acc*100:.2f}%")
     print(f"Average Entropy:         {avg_entropy:.3f} bits")
     print(f"Average Top-2 Margin:    {avg_margin:.3f}")
-    print(f"Report saved to:         {out_file}")
+    print(f"Report saved to key '{target_key}' in: {out_file}")
     return result
 
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate ClarifySign recognizer")
     parser.add_argument("--data", default=str(PROCESSED_DATA_DIR), help="Data directory")
+    parser.add_argument("--model", default=str(MODEL_PATH), help="Model weights path")
+    parser.add_argument("--labels", default=str(LABELS_PATH), help="Labels JSON path")
     parser.add_argument("--out", default=str(RESULTS_DIR / "recognizer_evaluation.json"), help="Output JSON path")
+    parser.add_argument("--key", default=None, help="Result key under which to record (preserves baseline)")
     args = parser.parse_args()
 
-    evaluate(data_dir=Path(args.data), out_file=Path(args.out))
+    evaluate(
+        data_dir=Path(args.data),
+        out_file=Path(args.out),
+        key=args.key,
+        model_path=Path(args.model),
+        labels_path=Path(args.labels)
+    )
 
 
 if __name__ == "__main__":
     main()
+

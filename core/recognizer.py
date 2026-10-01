@@ -85,6 +85,68 @@ class ISLBiLSTM(nn.Module):
         return logits
 
 
+class PositionalEncoding(nn.Module):
+    """Sinusoidal positional encoding for temporal landmark frames."""
+
+    def __init__(self, d_model: int, max_len: int = 500):
+        super().__init__()
+        pe = torch.zeros(max_len, d_model)
+        position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-np.log(10000.0) / d_model))
+        pe[:, 0::2] = torch.sin(position * div_term)
+        pe[:, 1::2] = torch.cos(position * div_term)
+        self.register_buffer("pe", pe.unsqueeze(0))
+
+    def forward(self, x):
+        return x + self.pe[:, :x.size(1)]
+
+
+class ISLTransformerEncoder(nn.Module):
+    """
+    Transformer Encoder over 225-dim skeletal landmark features.
+    Trained from scratch for ISL recognition across expanded vocabularies.
+    """
+
+    def __init__(
+        self,
+        input_dim=FEATURE_DIM,
+        d_model=128,
+        nhead=4,
+        num_layers=3,
+        num_classes=len(SHOPKEEPER_CLASSES),
+        dim_feedforward=256,
+        dropout=DROPOUT_RATE
+    ):
+        super().__init__()
+        self.input_dim = input_dim
+        self.d_model = d_model
+        self.num_classes = num_classes
+
+        self.input_proj = nn.Linear(input_dim, d_model)
+        self.pos_encoder = PositionalEncoding(d_model)
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=d_model,
+            nhead=nhead,
+            dim_feedforward=dim_feedforward,
+            dropout=dropout,
+            batch_first=True,
+            activation="gelu"
+        )
+        self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+        self.norm = nn.LayerNorm(d_model)
+        self.fc = nn.Linear(d_model, num_classes)
+
+    def forward(self, x):
+        h = self.input_proj(x)
+        h = self.pos_encoder(h)
+        h = self.transformer(h)
+        h = self.norm(h)
+        pooled = torch.mean(h, dim=1)
+        logits = self.fc(pooled)
+        return logits
+
+
+
 class ISLRecognizer:
     """
     Inference interface for our trained ISL recognition model.
@@ -131,16 +193,23 @@ class ISLRecognizer:
         if self.model_path.exists() and self.labels:
             try:
                 num_classes = len(self.labels)
-                self.model = ISLBiLSTM(
-                    input_dim=FEATURE_DIM,
-                    num_classes=num_classes
-                ).to(self.device)
-
                 checkpoint = torch.load(self.model_path, map_location=self.device)
-                if isinstance(checkpoint, dict) and "state_dict" in checkpoint:
-                    self.model.load_state_dict(checkpoint["state_dict"])
-                elif isinstance(checkpoint, dict):
-                    self.model.load_state_dict(checkpoint)
+                state_dict = checkpoint["state_dict"] if (isinstance(checkpoint, dict) and "state_dict" in checkpoint) else checkpoint
+                is_transformer = any("transformer" in k or "input_proj" in k for k in (state_dict.keys() if isinstance(state_dict, dict) else []))
+
+                if is_transformer:
+                    self.model = ISLTransformerEncoder(
+                        input_dim=FEATURE_DIM,
+                        num_classes=num_classes
+                    ).to(self.device)
+                else:
+                    self.model = ISLBiLSTM(
+                        input_dim=FEATURE_DIM,
+                        num_classes=num_classes
+                    ).to(self.device)
+
+                if isinstance(state_dict, dict):
+                    self.model.load_state_dict(state_dict)
                 else:
                     self.model = checkpoint
 

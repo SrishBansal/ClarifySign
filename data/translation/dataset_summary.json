@@ -1,0 +1,20 @@
+{
+  "total_pairs": 772,
+  "gold_domain_pairs": 760,
+  "general_augmentation_pairs": 12,
+  "train_samples": 617,
+  "val_samples": 77,
+  "test_samples": 78,
+  "languages_covered": [
+    "Hindi",
+    "Marathi",
+    "Bengali",
+    "Gujarati",
+    "Tamil",
+    "Telugu",
+    "Kannada",
+    "Malayalam",
+    "Punjabi",
+    "Odia"
+  ]
+}
